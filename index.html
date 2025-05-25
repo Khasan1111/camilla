@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Camilla.uz на продажу</title>
+    <title>Camilla.uz на продажу | Sotiladi</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -25,12 +25,41 @@
         a:hover {
             text-decoration: underline;
         }
+        .lang-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .lang-switcher button {
+            margin: 0 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
-    <div class="message">
-        <h1>Сайт camilla.uz продается!</h1>
-        <p>Для связи напишите мне в Telegram: <a href="https://t.me/ВАШ_ТЕЛЕГРАМ_ИМЯ" target="_blank">@ВАШ_ТЕЛЕГРАМ_ИМЯ</a></p>
+    <div class="lang-switcher">
+        <button onclick="setLanguage('ru')">Русский</button>
+        <button onclick="setLanguage('uz')">O'zbek</button>
     </div>
+    <div class="message">
+        <h1 id="title">Сайт camilla.uz продается!</h1>
+        <p id="contact">Для связи напишите мне в Telegram: <a href="https://t.me/kkkk_akh" target="_blank">@kkkk_akh</a></p>
+    </div>
+    <script>
+        function setLanguage(lang) {
+            if (lang === 'ru') {
+                document.getElementById('title').textContent = 'Сайт camilla.uz продается!';
+                document.getElementById('contact').innerHTML = 'Для связи напишите мне в Telegram: <a href="https://t.me/kkkk_akh" target="_blank">@kkkk_akh</a>';
+                document.documentElement.lang = 'ru';
+            } else if (lang === 'uz') {
+                document.getElementById('title').textContent = 'Camilla.uz sayti sotiladi!';
+                document.getElementById('contact').innerHTML = 'Bog\'lanish uchun Telegramda yozing: <a href="https://t.me/kkkk_akh" target="_blank">@kkkk_akh</a>';
+                document.documentElement.lang = 'uz';
+            }
+        }
+        // Установить русский язык по умолчанию
+        setLanguage('ru');
+    </script>
 </body>
 </html>
