@@ -1,9 +1,26 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Camilla.uz на продажу | Sotiladi</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Купить домен Camilla.uz — Сайт на продажи | Sotiladi</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Домен camilla.uz выставлен на продажу. Свяжитесь со мной в Telegram или по телефону. Sayt sotiladi." />
+    <meta name="keywords" content="купить домен camilla.uz, сайт camilla.uz продается, camilla.uz на продажу, sotiladi, domen sotiladi, uzbek domens" />
+    <meta name="author" content="Camilla.uz" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="Camilla.uz продается | Sotiladi" />
+    <meta property="og:description" content="Сайт camilla.uz выставлен на продажу. Свяжитесь со мной в Telegram: @kkkk_akh или по телефону." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://camilla.uz/" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Camilla.uz продается | Sotiladi" />
+    <meta name="twitter:description" content="Сайт camilla.uz выставлен на продажу. Свяжитесь со мной в Telegram или по телефону." />
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -35,6 +52,17 @@
             padding: 5px 10px;
             cursor: pointer;
         }
+        .copyable {
+            cursor: pointer;
+            color: #007bff;
+            text-decoration: underline;
+        }
+        .copied-text {
+            display: none;
+            color: green;
+            margin-left: 10px;
+            font-size: 18px;
+        }
     </style>
 </head>
 <body>
@@ -42,22 +70,51 @@
         <button onclick="setLanguage('ru')">Русский</button>
         <button onclick="setLanguage('uz')">O'zbek</button>
     </div>
+
     <div class="message">
         <h1 id="title">Сайт camilla.uz продается!</h1>
-        <p id="contact">Для связи напишите мне в Telegram: <a href="https://t.me/kkkk_akh" target="_blank">@kkkk_akh</a></p>
+        <p id="contact">
+            Для связи напишите мне в Telegram:
+            <a href="https://t.me/kkkk_akh" target="_blank" rel="noopener noreferrer">@kkkk_akh</a>
+        </p>
+        <p id="phone">
+            Телефон: <span class="copyable" onclick="copyPhone()">+998 90 270 02 24</span>
+            <span id="copied" class="copied-text">Скопировано!</span>
+        </p>
     </div>
+
     <script>
+        function copyPhone() {
+            const phoneNumber = '+998902700224';
+            navigator.clipboard.writeText(phoneNumber).then(() => {
+                const copiedNotice = document.getElementById('copied');
+                copiedNotice.style.display = 'inline';
+                setTimeout(() => {
+                    copiedNotice.style.display = 'none';
+                }, 2000);
+            });
+        }
+
         function setLanguage(lang) {
             if (lang === 'ru') {
                 document.getElementById('title').textContent = 'Сайт camilla.uz продается!';
-                document.getElementById('contact').innerHTML = 'Для связи напишите мне в Telegram: <a href="https://t.me/kkkk_akh" target="_blank">@kkkk_akh</a>';
+                document.getElementById('contact').innerHTML =
+                    'Для связи напишите мне в Telegram: <a href="https://t.me/kkkk_akh" target="_blank" rel="noopener noreferrer">@kkkk_akh</a>';
+                document.getElementById('phone').innerHTML =
+                    'Телефон: <span class="copyable" onclick="copyPhone()">+998 90 270 02 24</span> <span id="copied" class="copied-text">Скопировано!</span>';
+                document.title = 'Купить домен Camilla.uz — Сайт на продажу | Sotiladi';
                 document.documentElement.lang = 'ru';
             } else if (lang === 'uz') {
                 document.getElementById('title').textContent = 'Camilla.uz sayti sotiladi!';
-                document.getElementById('contact').innerHTML = 'Bog\'lanish uchun Telegramda yozing: <a href="https://t.me/kkkk_akh" target="_blank">@kkkk_akh</a>';
+                document.getElementById('contact').innerHTML =
+                    'Bogʻlanish uchun Telegramda yozing: <a href="https://t.me/kkkk_akh" target="_blank" rel="noopener noreferrer">@kkkk_akh</a>';
+                document.getElementById('phone').innerHTML =
+                    'Telefon: <span class="copyable" onclick="copyPhone()">+998 90 270 02 24</span> <span id="copied" class="copied-text">Nusxalandi!</span>';
+                document.title = 'Camilla.uz sayti sotiladi — Domen sotiladi | For Sale';
                 document.documentElement.lang = 'uz';
             }
         }
+
         // Установить русский язык по умолчанию
         setLanguage('ru');
     </script>
