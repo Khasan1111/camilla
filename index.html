@@ -3,44 +3,72 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Купить домен Camilla.uz — Сайт на продажи | Sotiladi</title>
-
+    <title>Купить домен Camilla.uz — Сайт на продажу | Sotiladi</title>
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Домен camilla.uz выставлен на продажу. Свяжитесь со мной в Telegram или по телефону. Sayt sotiladi." />
-    <meta name="keywords" content="купить домен camilla.uz, сайт camilla.uz продается, camilla.uz на продажу, sotiladi, domen sotiladi, uzbek domens" />
+    <meta name="description" content="Премиум-домен camilla.uz выставлен на продажу. Красивое, запоминающееся имя для бизнеса. Свяжитесь в Telegram или по телефону." />
+    <meta name="keywords" content="camilla.uz, купить домен, домен на продажу, sotiladi domen, uz domen sotish, премиум домен uz" />
     <meta name="author" content="Camilla.uz" />
-
-    <!-- Open Graph / Facebook -->
+    <!-- Open Graph / Social -->
     <meta property="og:title" content="Camilla.uz продается | Sotiladi" />
-    <meta property="og:description" content="Сайт camilla.uz выставлен на продажу. Свяжитесь со мной в Telegram: @kkkk_akh или по телефону." />
+    <meta property="og:description" content="Премиум-домен camilla.uz на продажу. Telegram: @kkkk_akh | Тел: +998 90 270 02 24" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://camilla.uz/" />
-
+    <meta property="og:image" content="https://camilla.uz/og-image.jpg" /> <!-- Замени на свою картинку, если есть -->
     <!-- Twitter -->
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Camilla.uz продается | Sotiladi" />
-    <meta name="twitter:description" content="Сайт camilla.uz выставлен на продажу. Свяжитесь со мной в Telegram или по телефону." />
-
+    <meta name="twitter:description" content="Премиум-домен camilla.uz на продажу. Свяжитесь: @kkkk_akh" />
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
-            background-color: #f0f0f0;
+            background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+            color: #333;
+            padding: 20px;
+            box-sizing: border-box;
         }
-        .message {
+        .container {
             text-align: center;
-            font-size: 24px;
+            background: white;
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+        p {
+            font-size: 22px;
+            margin: 15px 0;
         }
         a {
             color: #007bff;
             text-decoration: none;
+            font-weight: bold;
         }
         a:hover {
             text-decoration: underline;
+        }
+        .copyable {
+            cursor: pointer;
+            color: #007bff;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+        .copied-text {
+            display: none;
+            color: #28a745;
+            font-weight: bold;
+            margin-left: 10px;
         }
         .lang-switcher {
             position: absolute;
@@ -49,19 +77,26 @@
         }
         .lang-switcher button {
             margin: 0 5px;
-            padding: 5px 10px;
+            padding: 8px 16px;
+            border: 1px solid #ccc;
+            background: white;
             cursor: pointer;
+            border-radius: 8px;
+            transition: background 0.3s;
         }
-        .copyable {
-            cursor: pointer;
-            color: #007bff;
-            text-decoration: underline;
+        .lang-switcher button:hover {
+            background: #f0f0f0;
         }
-        .copied-text {
-            display: none;
-            color: green;
-            margin-left: 10px;
-            font-size: 18px;
+        .price {
+            font-size: 28px;
+            color: #e74c3c;
+            margin: 30px 0;
+            font-weight: bold;
+        }
+        @media (max-width: 600px) {
+            h1 { font-size: 28px; }
+            p { font-size: 18px; }
+            .price { font-size: 24px; }
         }
     </style>
 </head>
@@ -71,10 +106,12 @@
         <button onclick="setLanguage('uz')">O'zbek</button>
     </div>
 
-    <div class="message">
+    <div class="container">
         <h1 id="title">Сайт camilla.uz продается!</h1>
+        <div class="price" id="price">Цена: по запросу (обсуждаемая)</div>
+        <p id="desc">Премиум-домен для вашего бизнеса. Короткое, красивое и запоминающееся имя.</p>
         <p id="contact">
-            Для связи напишите мне в Telegram:
+            Для связи напишите в Telegram:
             <a href="https://t.me/kkkk_akh" target="_blank" rel="noopener noreferrer">@kkkk_akh</a>
         </p>
         <p id="phone">
@@ -85,37 +122,44 @@
 
     <script>
         function copyPhone() {
-            const phoneNumber = '+998902700224';
+            const phoneNumber = '+998 90 270 02 24'; // С пробелами для удобства
             navigator.clipboard.writeText(phoneNumber).then(() => {
                 const copiedNotice = document.getElementById('copied');
                 copiedNotice.style.display = 'inline';
                 setTimeout(() => {
                     copiedNotice.style.display = 'none';
                 }, 2000);
+            }).catch(() => {
+                // Fallback для старых браузеров
+                prompt('Скопируйте номер:', phoneNumber);
             });
         }
 
         function setLanguage(lang) {
             if (lang === 'ru') {
                 document.getElementById('title').textContent = 'Сайт camilla.uz продается!';
+                document.getElementById('price').textContent = 'Цена: по запросу (обсуждаемая)';
+                document.getElementById('desc').textContent = 'Премиум-домен для вашего бизнеса. Короткое, красивое и запоминающееся имя.';
                 document.getElementById('contact').innerHTML =
-                    'Для связи напишите мне в Telegram: <a href="https://t.me/kkkk_akh" target="_blank" rel="noopener noreferrer">@kkkk_akh</a>';
+                    'Для связи напишите в Telegram: <a href="https://t.me/kkkk_akh" target="_blank" rel="noopener noreferrer">@kkkk_akh</a>';
                 document.getElementById('phone').innerHTML =
                     'Телефон: <span class="copyable" onclick="copyPhone()">+998 90 270 02 24</span> <span id="copied" class="copied-text">Скопировано!</span>';
                 document.title = 'Купить домен Camilla.uz — Сайт на продажу | Sotiladi';
                 document.documentElement.lang = 'ru';
             } else if (lang === 'uz') {
                 document.getElementById('title').textContent = 'Camilla.uz sayti sotiladi!';
+                document.getElementById('price').textContent = 'Narxi: kelishilgan holda';
+                document.getElementById('desc').textContent = 'Biznesingiz uchun premium domen. Qisqa, chiroyli va esda qolarli nom.';
                 document.getElementById('contact').innerHTML =
                     'Bogʻlanish uchun Telegramda yozing: <a href="https://t.me/kkkk_akh" target="_blank" rel="noopener noreferrer">@kkkk_akh</a>';
                 document.getElementById('phone').innerHTML =
                     'Telefon: <span class="copyable" onclick="copyPhone()">+998 90 270 02 24</span> <span id="copied" class="copied-text">Nusxalandi!</span>';
-                document.title = 'Camilla.uz sayti sotiladi — Domen sotiladi | For Sale';
+                document.title = 'Camilla.uz domeni sotiladi — Sayt sotiladi | For Sale';
                 document.documentElement.lang = 'uz';
             }
         }
 
-        // Установить русский язык по умолчанию
+        // Русский по умолчанию
         setLanguage('ru');
     </script>
 </body>
