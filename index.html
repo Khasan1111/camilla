@@ -10,10 +10,10 @@
     <meta name="author" content="Camilla.uz" />
     <!-- Open Graph / Social -->
     <meta property="og:title" content="Camilla.uz продается | Sotiladi" />
-    <meta property="og:description" content="Премиум-домен camilla.uz на продажу. Telegram: @kkkk_akh | Тел: +998 90 270 02 24" />
+    <meta property="og:description" content="Премиум-домен camilla.uz на продажу. Telegram: @khasan_dev | Тел: +998 90 270 02 24" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://camilla.uz/" />
-    <meta property="og:image" content="https://camilla.uz/og-image.jpg" /> <!-- Замени на свою картинку, если есть -->
+    <meta property="og:image" content="https://camilla.uz/og-image.jpg" /> <!-- Замени, если добавишь картинку -->
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Camilla.uz продается | Sotiladi" />
@@ -58,17 +58,11 @@
         a:hover {
             text-decoration: underline;
         }
-        .copyable {
-            cursor: pointer;
+        .phone-link {
             color: #007bff;
             text-decoration: underline;
             font-weight: bold;
-        }
-        .copied-text {
-            display: none;
-            color: #28a745;
-            font-weight: bold;
-            margin-left: 10px;
+            cursor: pointer;
         }
         .lang-switcher {
             position: absolute;
@@ -112,29 +106,15 @@
         <p id="desc">Премиум-домен для вашего бизнеса. Короткое, красивое и запоминающееся имя.</p>
         <p id="contact">
             Для связи напишите в Telegram:
-            <a href="https://t.me/kasan_dev" target="_blank" rel="noopener noreferrer">@kkkk_akh</a>
+            <a href="https://t.me/khasan_dev" target="_blank" rel="noopener noreferrer">@khasan_dev</a>
         </p>
         <p id="phone">
-            Телефон: <span class="copyable" onclick="copyPhone()">+998 90 270 02 24</span>
-            <span id="copied" class="copied-text">Скопировано!</span>
+            Телефон: 
+            <a href="tel:+998902700224" class="phone-link">+998 90 270 02 24</a>
         </p>
     </div>
 
     <script>
-        function copyPhone() {
-            const phoneNumber = '+998 90 270 02 24'; // С пробелами для удобства
-            navigator.clipboard.writeText(phoneNumber).then(() => {
-                const copiedNotice = document.getElementById('copied');
-                copiedNotice.style.display = 'inline';
-                setTimeout(() => {
-                    copiedNotice.style.display = 'none';
-                }, 2000);
-            }).catch(() => {
-                // Fallback для старых браузеров
-                prompt('Скопируйте номер:', phoneNumber);
-            });
-        }
-
         function setLanguage(lang) {
             if (lang === 'ru') {
                 document.getElementById('title').textContent = 'Сайт camilla.uz продается!';
@@ -143,7 +123,7 @@
                 document.getElementById('contact').innerHTML =
                     'Для связи напишите в Telegram: <a href="https://t.me/khasan_dev" target="_blank" rel="noopener noreferrer">@khasan_dev</a>';
                 document.getElementById('phone').innerHTML =
-                    'Телефон: <span class="copyable" onclick="copyPhone()">+998 90 270 02 24</span> <span id="copied" class="copied-text">Скопировано!</span>';
+                    'Телефон: <a href="tel:+998902700224" class="phone-link">+998 90 270 02 24</a>';
                 document.title = 'Купить домен Camilla.uz — Сайт на продажу | Sotiladi';
                 document.documentElement.lang = 'ru';
             } else if (lang === 'uz') {
@@ -153,7 +133,7 @@
                 document.getElementById('contact').innerHTML =
                     'Bogʻlanish uchun Telegramda yozing: <a href="https://t.me/khasan_dev" target="_blank" rel="noopener noreferrer">@khasan_dev</a>';
                 document.getElementById('phone').innerHTML =
-                    'Telefon: <span class="copyable" onclick="copyPhone()">+998 90 270 02 24</span> <span id="copied" class="copied-text">Nusxalandi!</span>';
+                    'Telefon: <a href="tel:+998902700224" class="phone-link">+998 90 270 02 24</a>';
                 document.title = 'Camilla.uz domeni sotiladi — Sayt sotiladi | For Sale';
                 document.documentElement.lang = 'uz';
             }
