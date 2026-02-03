@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P1</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        #code {
+            cursor: pointer;
+            user-select: all;
+        }
+    </style>
+</head>
+<body>
+    <div id="code">// ЗАПУСТИТЕ ДО НАЧАЛА ЭКЗАМЕНА!
+// CTRL + SHIFT + X - полная остановка скрипта
+
+(function() {
+    let testData = null;
+    let highlightTimer = null;
+    let isActive = false;
+    let isScriptRunning = true;
+
+    // ======= ГОРЯЧАЯ КЛАВИША ДЛЯ ОСТАНОВКИ =======
+    document.addEventListener('keydown', function(e) {
+        if (e.ctrlKey && e.shiftKey && e.key === 'X') {
+            e.preventDefault();
+            killScript();
+        }
+    });
+
+    function killScript() {
+        if (!isScriptRunning) return;
+        isScriptRunning = false;
+        if (highlightTimer) {
+            clearInterval(highlightTimer);
+            highlightTimer = null;
+        }
+        isActive = false;
+        testData = null;
+    }
+
+    // ======= ПЕРЕХВАТ XMLHttpRequest =======
+    const XHR = XMLHttpRequest.prototype;
+    const originalOpen = XHR.open;
+    const originalSend = XHR.send;
+
+    XHR.open = function(method, url) {
+        this._requestURL = url;
+        return originalOpen.apply(this, arguments);
+    };
+
+    XHR.send = function() {
+        this.addEventListener('load', function() {
+            if (!isScriptRunning) return;
+            
+            const url = this._requestURL || '';
+            
+            if (url.includes('question') || 
+                url.includes('exam') || 
+                url.includes('assessment') ||
+                url.includes('teacher') ||
+                url.match(/\/\d{6}/) ||
+                url.includes('expand')) {
+                
+                try {
+                    const response = JSON.parse(this.responseText);
+                    
+                    if (response && response.data && Array.isArray(response.data)) {
+                        const firstItem = response.data[0];
+                        
+                        if (firstItem && firstItem.question && firstItem.question.options) {
+                            testData = response.data;
+                            setTimeout(() => {
+                                if (isScriptRunning) startHighlighting();
+                            }, 2000);
+                        }
+                    }
+                } catch (e) {}
+            }
+        });
+        
+        return originalSend.apply(this, arguments);
+    };
+
+    // ======= ПЕРЕХВАТ FETCH =======
+    const originalFetch = window.fetch;
+    window.fetch = async function(...args) {
+        const url = args[0];
+        const response = await originalFetch.apply(this, args);
+        
+        if (!isScriptRunning) return response;
+        
+        if (typeof url === 'string') {
+            if (url.includes('question') || 
+                url.includes('exam') || 
+                url.includes('assessment') ||
+                url.includes('teacher') ||
+                url.match(/\/\d{6}/) ||
+                url.includes('expand')) {
+                
+                const cloned = response.clone();
+                try {
+                    const data = await cloned.json();
+                    
+                    if (data && data.data && Array.isArray(data.data)) {
+                        const firstItem = data.data[0];
+                        
+                        if (firstItem && firstItem.question && firstItem.question.options) {
+                            testData = data.data;
+                            setTimeout(() => {
+                                if (isScriptRunning) startHighlighting();
+                            }, 2000);
+                        }
+                    }
+                } catch (e) {}
+            }
+        }
+        
+        return response;
+    };
+
+    // ======= ФУНКЦИЯ ПОДСВЕТКИ =======
+    function highlight() {
+        if (!isScriptRunning || !testData) return;
+
+        const questionElement = document.querySelector('.prose.w-full.text-xl .__Latex__');
+        if (!questionElement) return;
+        
+        const currentQuestion = questionElement.textContent.trim();
+        
+        const questionData = testData.find(item => 
+            item.question && item.question.text.trim() === currentQuestion
+        );
+        
+        if (!questionData) return;
+        
+        const correctOption = questionData.question.options.find(opt => opt.order === 1);
+        if (!correctOption) return;
+        
+        const answerContainers = document.querySelectorAll('.flex.items-center.gap-1.border-b');
+        
+        answerContainers.forEach(container => {
+            const answerElement = container.querySelector('.prose .__Latex__');
+            if (!answerElement) return;
+            
+            const answerText = answerElement.textContent.trim();
+            
+            if (answerText === correctOption.text.trim()) {
+                const originalText = answerElement.textContent;
+                
+                let html = '';
+                let words = originalText.split(/(\s+)/);
+
+                words.forEach(word => {
+                    if (/^\s+$/.test(word)) {
+                        html += word;
+                        return;
+                    }
+                    
+                    let chars = [...word];
+                    chars.forEach((char, i) => {
+                        if (i === 0 || i === 2) {
+                            html += `<span style="font-weight: 500; transition: font-weight 0.3s ease;">${char}</span>`;
+                        } else {
+                            html += char;
+                        }
+                    });
+                });
+
+                answerElement.innerHTML = html;
+
+                setTimeout(() => {
+                    const spans = answerElement.querySelectorAll('span');
+                    spans.forEach(span => {
+                        span.style.fontWeight = '400';
+                    });
+                    setTimeout(() => {
+                        answerElement.textContent = originalText;
+                    }, 300);
+                }, 1000);
+            }
+        });
+    }
+
+    // ======= ЗАПУСК АВТОПОДСВЕТКИ =======
+    function startHighlighting() {
+        if (!isScriptRunning || isActive) return;
+        isActive = true;
+        setTimeout(highlight, 500);
+        highlightTimer = setInterval(highlight, 20000);
+    }
+
+    // ======= КОМАНДЫ =======
+    window.showAnswer = function() {
+        if (!isScriptRunning) return;
+        highlight();
+    };
+
+    window.stopHighlight = function() {
+        if (highlightTimer) {
+            clearInterval(highlightTimer);
+            highlightTimer = null;
+            isActive = false;
+        }
+    };
+
+    window.startHighlight = function() {
+        if (!isScriptRunning || !testData) return;
+        isActive = false;
+        startHighlighting();
+    };
+
+    window.checkData = function() {
+        if (!isScriptRunning) return false;
+        return testData ? testData.length : 0;
+    };
+
+    window.killScript = killScript;
+    console.clear();
+})();</div>
+
+    <script>
+        document.getElementById('code').addEventListener('click', function() {
+            navigator.clipboard.writeText(this.textContent);
+        });
+    </script>
+</body>
+</html>
